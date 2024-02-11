@@ -15,15 +15,12 @@ variable "INSTANCE_TYPE" {
   default = "t2.micro"
 }
 
-variable "PATH_TO_PRIVATE_KEY" {
-    default = "keys/ec2key"
+variable "AMIS" {
+  type = map 
+  default = {
+    "us-east-1": "ami-0c7217cdde317cfec",
+    "us-east-2": "ami-0748d13ffbc370c2b",
+    "us-west-1": "ami-07f8b4231133414a6 ",
+    "us-west-2": "ami-0a24e6e101933d294"
   }
-
-variable "PATH_TO_PUBLIC_KEY" {
-    default = "keys/ec2key.pub"
-  }
-
-variable "INSTANCE_USERNAME" {
-    default = "ubuntu"
-  }
-
+}
