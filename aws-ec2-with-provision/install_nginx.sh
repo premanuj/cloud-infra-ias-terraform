@@ -4,10 +4,8 @@ until [[ -f /var/lib/cloud/instance/boot-finished ]]; do
   sleep 1
 done
 
-# install nginx
-apt-get update
-apt-get -y install nginx
-
-#make sure nginx is started
-service nginx start 
-
+#!/bin/bash
+sudo yum update -y
+sudo amazon-linux-extras install nginx1 -y 
+sudo systemctl enable nginx
+sudo systemctl start nginx
