@@ -5,8 +5,13 @@ data "aws_ami" "ubuntu"{
   owners = ["amazon"]
   filter {
     name = "name"
-    values = ["amzn*"]
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
   }
+  # filter {
+  #   name = "architecture"
+  #   values = ["arm64"]
+  # }
+  
   //query = "sort_by(Images, &CreationDate)[].Name"
 }
 
@@ -20,6 +25,7 @@ resource "aws_instance" "ec2instance" {
   ami = data.aws_ami.ubuntu.id
   instance_type = var.INSTANCE_TYPE
   availability_zone = data.aws_availability_zones.available.names[0]
+  key_name = aws_key_pair.ec2key.key_name
   tags = {
     Name: "Test instance"
   }
@@ -31,7 +37,8 @@ resource "aws_instance" "ec2instance" {
   
   provisioner "remote-exec" {
       inline = [
-        "chmod +x /tmp/install_ngnix.sh",
+        "chmod +x /tmp/install_nginx.sh",
+        "ls /tmp/",
         "sudo /tmp/install_nginx.sh"
       ]
     }
