@@ -16,14 +16,14 @@ variable "INSTANCE_TYPE" {
 }
 
 variable "PATH_TO_PRIVATE_KEY" {
-    default = "keys/ec2key"
+    default = "/home/prem/premanuj/cloud-infra-ias-terraform/aws-ec2-with-provision/keys/ec2key"
   }
 
 variable "PATH_TO_PUBLIC_KEY" {
-    default = "keys/ec2key.pub"
+    default = "/home/prem/premanuj/cloud-infra-ias-terraform/aws-ec2-with-provision/keys/ec2key.pub"
   }
 
 variable "INSTANCE_USERNAME" {
-    default = "ubuntu"
+    default = "ec2-user"
   }
 
