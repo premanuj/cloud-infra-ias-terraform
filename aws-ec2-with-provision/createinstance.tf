@@ -1,3 +1,5 @@
+
+
 data "aws_availability_zones" "available" {}
 
 data "aws_ami" "ubuntu"{
@@ -26,6 +28,7 @@ resource "aws_instance" "ec2instance" {
   instance_type = var.INSTANCE_TYPE
   availability_zone = data.aws_availability_zones.available.names[0]
   key_name = aws_key_pair.ec2key.key_name
+  vpc_security_group_ids =  [aws_security_group.sg_custom_us_east.id]
   tags = {
     Name: "Test instance"
   }
@@ -54,4 +57,3 @@ resource "aws_instance" "ec2instance" {
 output "public_ip" {
   value = aws_instance.ec2instance.public_ip
 }
-
