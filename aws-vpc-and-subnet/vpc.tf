@@ -12,8 +12,32 @@ resource "aws_vpc" "custom_vpc" {
   cidr_block = "10.0.0.0/16"
   instance_tenancy = "default"
   enable_dns_support = true
-  enable_dns_hostnames = trur
+  enable_dns_hostnames = true
   tags = {
     Name = "customVPC"
   }
 }
+
+# 2. Create Subnet in custom VPC
+resource "aws_subnet" "custom_vpc_pub_1" {
+  vpc_id = aws_vpc.custom_vpc.id
+  cidr_block = "10.0.1.0/24"
+  map_public_ip_on_launch = true
+  availability_zone = "us-west-1b"
+
+  tags = {
+    "Name" = "custom_vpc_pub_1"
+  }
+}
+
+resource "aws_subnet" "custom_vpc_pub_2" {
+  vpc_id = aws_vpc.custom_vpc.id
+  cidr_block = "10.0.2.0/24"
+  map_public_ip_on_launch = true
+  availability_zone = "us-west-1c"
+
+  tags = {
+    "Name" = "custom_vpc_pub_2"
+  }
+}
+
