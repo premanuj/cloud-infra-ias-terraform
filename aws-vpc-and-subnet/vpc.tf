@@ -52,3 +52,11 @@ resource "aws_subnet" "custom_vpc_private_1" {
   }
 }
 
+# 3. Define Internet Gateway
+resource "aws_internet_gateway" "custom_vpc_igw" {
+  vpc_id = aws_vpc.custom_vpc.id
+  tags = {
+    Name = "CustomVPC-IGW"
+  }
+}
+
