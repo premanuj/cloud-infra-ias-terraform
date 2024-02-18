@@ -4,8 +4,8 @@
 # 2. Create Subnet in custom VPC
 # 3. Define Internet Gateway
 # 4. Define Route table for VPC
-# 5. Define the routing association between a route table
-# and a subnet ot a route table and an internet gateway or virtual private gateway
+# 5. Define the routing association between a route table and a subnet 
+# or a route table and an internet gateway or virtual private gateway
 
 # 1. Create a AWS VPC
 resource "aws_vpc" "custom_vpc" {
@@ -60,3 +60,15 @@ resource "aws_internet_gateway" "custom_vpc_igw" {
   }
 }
 
+# 4. Define Route table for VPC
+resource "aws_route_table" "custom_rt" {
+  vpc_id = aws_vpc.custom_vpc.id
+  route  {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.custom_vpc_igw.id
+  }
+
+  tags = {
+    Name = "customvpc_rt"
+  }
+}
