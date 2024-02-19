@@ -72,3 +72,14 @@ resource "aws_route_table" "custom_rt" {
     Name = "customvpc_rt"
   }
 }
+
+# 5. Routing Association
+resource "aws_route_table_association" "custom_vpc_pub_1_rta" {
+  subnet_id = aws_subnet.custom_vpc_pub_1.id
+  route_table_id = aws_route_table.custom_rt.id
+}
+
+resource "aws_route_table_association" "custom_vpc_pub_2_rta" {
+  subnet_id = aws_subnet.custom_vpc_pub_2.id
+  route_table_id = aws_route_table.custom_rt.id
+}

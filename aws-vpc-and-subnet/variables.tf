@@ -7,7 +7,7 @@ variable "PROFILE" {
 
 variable "REGION" {
   type = string
-  default = "us-east-1"
+  default = "us-west-1"
 }
 
 variable "INSTANCE_TYPE" {
