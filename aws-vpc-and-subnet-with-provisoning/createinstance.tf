@@ -24,10 +24,10 @@ resource "aws_key_pair" "ec2key"{
 resource "aws_instance" "ec2instance-1" {
   ami = data.aws_ami.ubuntu.id
   instance_type = var.INSTANCE_TYPE
-  availability_zone = data.aws_availability_zones.available.names[0]
+  availability_zone = "us-west-1b"
   key_name = aws_key_pair.ec2key.key_name
   vpc_security_group_ids =  [aws_security_group.allow_custom_vpc_ssh.id, aws_security_group.allow_custom_vpc_http.id]
-  subnet_id = aws_subnet.custom_vpc_pub_2.id
+  subnet_id = aws_subnet.custom_vpc_pub_1.id
   tags = {
     Name: "Test instance"
   }
@@ -40,7 +40,6 @@ resource "aws_instance" "ec2instance-1" {
   provisioner "remote-exec" {
       inline = [
         "chmod +x /tmp/install_nginx.sh",
-        "ls /tmp/",
         "sudo /tmp/install_nginx.sh"
       ]
     }
@@ -57,7 +56,7 @@ resource "aws_instance" "ec2instance-1" {
 resource "aws_instance" "ec2instance-2" {
   ami = data.aws_ami.ubuntu.id
   instance_type = var.INSTANCE_TYPE
-  availability_zone = data.aws_availability_zones.available.names[0]
+  availability_zone = "us-west-1c"
   key_name = aws_key_pair.ec2key.key_name
   vpc_security_group_ids =  [aws_security_group.allow_custom_vpc_ssh.id]
   subnet_id = aws_subnet.custom_vpc_private_1.id
